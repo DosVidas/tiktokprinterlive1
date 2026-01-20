@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Tiktok Printer Premium</title>
+    <meta name="description" content="Tiktok Printer Guess Words Game - Premium Edition">
+    <meta name="author" content="Antigravity AI">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/reset.css?v=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css?v=1.1">
+    <script type="text/javascript" src="words_es.js"></script>
+    <script type="text/javascript" src="msg_es.js"></script>
+    <script type="text/javascript" src="../assets/tts/speakClient.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/socket.io.js"></script>
+    <script type="text/javascript" src="../assets/js/connection.js"></script>
+    <script type="text/javascript" src="../assets/js/app.js"></script>
+    <script type="text/javascript" src="../assets/js/auth.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="info">
+            <div class="mb-3">
+                <a href="/">MENÚ</a>
+            </div>
+            <table class="mb-3">
+                <tr>
+                    <td>Lienzo</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td id="gameSize">&infin;</td>
+                </tr>
+                <tr>
+                    <td>Estado del chat</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td id="stateText">No conectado</td>
+                </tr>
+                <tr>
+                    <td>Tiempo restante</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td id="gameTimeout">&infin;</td>
+                </tr>
+                <tr>
+                    <td>Palabras restantes</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td id="gameWords">&infin;</td>
+                </tr>
+            </table>
+            <div class="mb-3">
+                <button id="btnPrepare">INICIAR JUEGO</button>
+            </div>
+            <div class="text-bold mt-3">Conexión TikTok:</div>
+            <div class="input-group mt-2 mb-3">
+                <input id="targetUsername" type="text" placeholder="@usuario" style="flex: 1; min-width: 0;" />
+                <button id="targetConnect" class="btn btn-primary" style="flex: 1;">CONECTAR</button>
+                <button id="toggleFullscreen" class="btn btn-secondary" title="Pantalla Completa"
+                    style="width: 45px; flex-shrink: 0;">🔲</button>
+            </div>
+            <div class="text-bold">Configuración de impresión:</div>
+            <table class="mt-2 mb-3">
+                <tr>
+                    <td><input id="confComment" type="checkbox" checked="true" />&nbsp;&nbsp;</td>
+                    <td>Comentario</td>
+                </tr>
+                <tr>
+                    <td><input id="confLike" type="checkbox" checked="true" />&nbsp;&nbsp;</td>
+                    <td>Me gusta</td>
+                </tr>
+                <tr>
+                    <td><input id="confShare" type="checkbox" checked="true" />&nbsp;&nbsp;</td>
+                    <td>Compartir &amp; Seguir</td>
+                </tr>
+                <tr>
+                    <td><input id="confJoin" type="checkbox" />&nbsp;&nbsp;</td>
+                    <td>Usuario se unió</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button id="btnSave" class="mt-2">GUARDAR</button></td>
+                </tr>
+            </table>
+            <div>
+                <audio id="sfx1" class="d-block">
+                    <source src="../assets/sounds/printer_comment.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="sfx2" class="d-block">
+                    <source src="../assets/sounds/printer_gift.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="sfx3" class="d-block">
+                    <source src="../assets/sounds/printer_winner.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="sfx4" class="d-block">
+                    <source src="../assets/sounds/yey.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="tts" class="d-block"></audio>
+            </div>
+        </div>
+        <div class="container">
+            <img src="../assets/media/unified_scene.png?v=3.0" class="background" alt="Cyberpunk Printer Scene">
+            <div class="printer">
+                <table class="table">
+                    <tr>
+                        <td id="paperContainer">
+                            <div id="paper" class="paper"></div>
+                        </td>
+                    </tr>
+                    <tr class="bottom-container">
+                        <td class="bottom-wrapper">
+                            <div class="bottom-bar">
+                                <div class="bottom-content">
+                                    <div id="textGuess" class="text-guess blink">***</div>
+                                    <div class="text-caption">💬 Escribe la <span class="text-bold">palabra</span></div>
+                                    <div class="text-caption" style="margin-top: 0.5rem; margin-bottom: 0rem;">
+                                        🙋‍♀️🙋‍♂️ Adivina la palabra para imprimir tu <span class="text-bold">foto de
+                                            perfil</span></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

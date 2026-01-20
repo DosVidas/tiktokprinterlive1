@@ -1,0 +1,19 @@
+{
+	"name": "tiktok-printer-premium",
+	"version": "2.0.0",
+	"description": "Tiktok Printer",
+	"main": "server.js",
+	"dependencies": {
+		"dotenv": "^16.0.0",
+		"express": "^4.17.2",
+		"socket.io": "^4.4.1",
+		"tiktok-live-connector": "^2.0.0"
+	},
+	"scripts": {
+		"start": "node server.js",
+		"app": "node server.js"
+	},
+	"author": "2Vidas GameCrew",
+	"license": "Proprietary",
+	"type": "module"
+}

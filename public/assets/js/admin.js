@@ -1,0 +1,61 @@
+$(document).ready(() => {
+    // Keys para LocalStorage
+    const CONFIG_KEY = 'tiktok_printer_config';
+
+    // Cargar config actual
+    function loadConfig() {
+        const configRaw = localStorage.getItem(CONFIG_KEY);
+        if (configRaw) {
+            const config = JSON.parse(configRaw);
+
+            $('#tiktokId').val(config.tiktokId || '');
+            $('#sessionId').val(config.sessionId || '');
+            $('#confComment').prop('checked', config.confComment !== false);
+            $('#confLike').prop('checked', config.confLike !== false);
+            $('#confShare').prop('checked', config.confShare !== false);
+            $('#confJoin').prop('checked', config.confJoin !== false);
+            $('#msgGift').val(config.msgGift || '|username| envió un regalo!');
+            $('#msgWinner').val(config.msgWinner || '¡Felicidades |username|!');
+            // Password update removed for security
+        } else {
+            // Valores por defecto
+            $('#confComment').prop('checked', true);
+            $('#confLike').prop('checked', true);
+            $('#confShare').prop('checked', true);
+            $('#confJoin').prop('checked', true);
+        }
+    }
+
+    // Guardar config
+    $('#adminForm').submit((e) => {
+        e.preventDefault();
+
+        const config = {
+            tiktokId: $('#tiktokId').val().trim(),
+            sessionId: $('#sessionId').val().trim(),
+            confComment: $('#confComment').is(':checked'),
+            confLike: $('#confLike').is(':checked'),
+            confShare: $('#confShare').is(':checked'),
+            confJoin: $('#confJoin').is(':checked'),
+            msgGift: $('#msgGift').val().trim(),
+            msgWinner: $('#msgWinner').val().trim(),
+            accessCode: $('#accessCode').val().trim() || '260913',
+            lastUpdated: new Date().getTime()
+        };
+
+        localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+
+        // Toast feedback
+        $('#toast').fadeIn().delay(2000).fadeOut();
+    });
+
+    // Logout
+    $('#logoutBtn').click(() => {
+        if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+            Auth.logout();
+        }
+    });
+
+    // Iniciar
+    loadConfig();
+});
