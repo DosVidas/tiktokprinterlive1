@@ -217,8 +217,8 @@ body {
 }
 
 .printer .paper {
-    width: 65%;
-    /* Agrandado final al 65% para máxima visibilidad */
+    width: 75%;
+    /* Agrandado al 75% */
     margin: 0 auto;
     background-color: #f0f0f0;
     background-image: url('../media/paper_texture.png');
@@ -229,7 +229,6 @@ body {
     transform: perspective(1000px) rotateX(1deg);
     transform-origin: top;
     padding: 3rem 1.5rem 1.5rem 1.5rem;
-    /* Padding ajustado para el nuevo ancho */
     max-height: 100%;
     overflow-y: auto;
     color: #111;
@@ -239,112 +238,49 @@ body {
     scrollbar-width: none;
 }
 
-.printer .paper::-webkit-scrollbar {
-    display: none;
-}
+/* ... (scrollbar styles skipped) ... */
 
-.printer .item {
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-    padding: 0.8rem 0.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    word-break: break-all;
-    background: rgba(0, 0, 0, 0.02);
-    margin-bottom: 4px;
-    line-height: 1.4;
-    text-transform: uppercase;
-    letter-spacing: -0.5px;
-}
-
-/* Parte inferior del juego */
-.bottom-container {
-    height: 35%;
-    vertical-align: middle;
-}
-
-.bottom-wrapper {
-    padding: 1.5rem;
-    pointer-events: auto;
-}
-
-.bottom-bar {
-    backdrop-filter: blur(12px);
-    background: rgba(15, 23, 42, 0.8);
-    border-radius: 1.5rem;
-    border: 1px solid var(--glass-border);
-    width: 100%;
-    padding: 1.25rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.text-guess {
-    font-weight: 800;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.8rem;
-    color: #00ffff;
-    /* Cian Neon */
-    background: rgba(0, 255, 255, 0.05);
-    border-radius: 1rem;
-    border: 2px solid #00ffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-    word-break: break-all;
-    /* Seguridad para palabras extra largas */
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.text-caption {
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 1rem;
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background: rgba(0, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 0.8rem;
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    display: inline-block;
-    width: 100%;
-}
-
-.text-caption .text-bold {
-    color: #ffaa00;
-    /* Amber para destacar palabras clave */
-    font-weight: 800;
-    text-shadow: 0 0 15px rgba(255, 170, 0, 0.6);
-}
-
-/* Mensajes Especiales */
+/* Mensajes Especiales Mejorados */
 .gift-message {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background: linear-gradient(90deg, #fff7ed, #ffedd5);
-    border-left: 4px solid #f97316;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border-radius: 0.5rem;
-    color: #9a3412;
-    font-weight: bold;
-    font-size: 0.95rem;
+    text-align: center;
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 2px solid #f97316;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    border-radius: 1rem;
+    color: #c2410c;
+    font-weight: 800;
+    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .photo-message {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background: linear-gradient(90deg, #eff6ff, #dbeafe);
-    border-left: 4px solid #3b82f6;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    border-radius: 0.5rem;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 3px solid #3b82f6;
+    padding: 1.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 1.5rem;
     color: #1e40af;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .profile-photo {

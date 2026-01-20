@@ -400,15 +400,21 @@ function addGift(data) {
     let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : (pageLang === 'es' ? 'Desconocido' : 'Unknown');
     let giftName = data.gift && data.gift.name ? data.gift.name : (pageLang === 'es' ? 'regalo' : 'gift');
     let repeatCount = data.repeatCount || 1;
-    let msg;
-    if (typeof MSG_GIFT !== 'undefined') {
-        msg = MSG_GIFT.replace('|username|', userName);
-    } else {
-        console.warn(pageLang === 'es' ? 'MSG_GIFT no está definido. ¿Olvidaste incluir msg_es.js o msg_en.js?' : 'MSG_GIFT is undefined! Did you forget to include msg_en.js?');
-        msg = pageLang === 'es' ? (userName + ' envió un regalo!') : (userName + ' sent a gift!');
-    }
-    msg += ` <span class='gift-highlight'>🎁 ${repeatCount} × ${sanitize(giftName)}</span>`;
-    addContent(`<span class='gift-message'>${msg}</span>`);
+    // Texto de regalo fijo solicitado
+    let thankYouText = pageLang === 'es' ? '¡Gracias por tu regalo!' : 'Thanks for your gift!';
+
+    // Icono animado
+    let giftIcon = `<div style="font-size: 1.5rem; margin-bottom: 0.2rem;">🎁</div>`;
+
+    // Construcción del mensaje estético
+    let html = `${giftIcon}
+                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${thankYouText}</div>
+                <div style="font-size: 1.1rem; margin: 0.3rem 0; color: #ea580c;">${userName}</div>
+                <div style="font-size: 0.9rem; background: rgba(255,255,255,0.5); padding: 0.2rem 0.5rem; border-radius: 1rem;">
+                    ${repeatCount} × ${sanitize(giftName)}
+                </div>`;
+
+    addContent(`<div class='gift-message'>${html}</div>`);
     playSound(2);
 }
 
@@ -417,9 +423,16 @@ function addPhoto(data, reason) {
     const pageLang = (document.documentElement && document.documentElement.lang) ? document.documentElement.lang : 'en';
     let userName = (data.user && (data.user.uniqueId || data.user.nickname)) ? (data.user.uniqueId || data.user.nickname) : (pageLang === 'es' ? 'Desconocido' : 'Unknown');
     let photoUrl = (data.user && data.user.profilePictureUrl) ? data.user.profilePictureUrl : '/assets/img/image.png';
-    let label = reason === 'winner' ? (pageLang === 'es' ? '🏆 ¡Ganador!' : '🏆 Winner!') : '';
+    // Texto de ganador impactante
+    let label = reason === 'winner' ? (pageLang === 'es' ? '¡ERES EL GANADOR!' : 'YOU ARE THE WINNER!') : '';
+
+    // HTML Estético
+    let html = `<div style="font-size: 1.2rem; font-weight: 900; color: #2563eb; margin-bottom: 0.5rem; text-shadow: 0 2px 0 rgba(255,255,255,0.5);">${label}</div>
+                <img src='${photoUrl}' alt='${userName}' style='width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); margin: 0.5rem 0;' />
+                <div style="font-size: 1.3rem; font-weight: 800; color: #1e3a8a; letter-spacing: -0.5px;">${userName}</div>`;
+
     // Add to chat area
-    addContent(`<span class='photo-message'><img src='${photoUrl}' alt='${userName}' class='profile-photo'/> <span class='photo-label'>${label}</span> <span class='photo-username'>${userName}</span></span>`);
+    addContent(`<div class='photo-message'>${html}</div>`);
 }
 
 // New chat comment received
