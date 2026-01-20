@@ -39,14 +39,17 @@ $(document).ready(() => {
             confJoin: $('#confJoin').is(':checked'),
             msgGift: $('#msgGift').val().trim(),
             msgWinner: $('#msgWinner').val().trim(),
-            accessCode: $('#accessCode').val().trim() || '260913',
+            accessCode: '260913', // Fixed/Default internal code since UI was removed
             lastUpdated: new Date().getTime()
         };
 
         localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
 
-        // Toast feedback
-        $('#toast').fadeIn().delay(2000).fadeOut();
+        // Toast feedback & Redirect
+        $('#toast').fadeIn();
+        setTimeout(() => {
+            window.location.href = 'menu.html';
+        }, 1500);
     });
 
     // Logout
