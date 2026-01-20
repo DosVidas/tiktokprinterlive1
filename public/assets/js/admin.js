@@ -46,8 +46,11 @@ $(document).ready(() => {
         localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
 
         // Toast feedback & Redirect
+        console.log("Config submitted. Redirecting in 1.5s...");
         $('#toast').fadeIn();
+
         setTimeout(() => {
+            console.log("Redirecting now...");
             window.location.href = 'menu.html';
         }, 1500);
     });
